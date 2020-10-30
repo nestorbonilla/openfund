@@ -1,0 +1,116 @@
+// @import "~antd/dist/antd.less";
+
+@font-face {
+  font-family: 'Messer';
+  src: local('Messer'),
+    url(../fonts/messer.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Suisse';
+  src: local('Suisse'),
+    url(../fonts/suisse-intl-regular.otf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Suisse';
+  src: local('Suisse'),
+    url(../fonts/suisse-intl-italic.otf) format('truetype');
+  font-style: italic;
+}
+
+.app {
+  text-align: center;
+}
+
+.menu-logo {
+  height: 2.5em;
+  vertical-align: middle;
+}
+
+.site-layout {
+  padding: 2rem;
+}
+
+.opportunity-detail-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-link {
+  font-family: Messer;
+  text-transform: uppercase;
+  font-size: 25px;
+}
+
+.nav-link:hover {
+  color: rgba(0, 0, 0, 1.0)!important;
+}
+
+.ant-menu-item-selected {
+  border-bottom: 2px solid #000 !important;
+}
+
+.ant-menu-item-selected a {
+  color: rgba(0, 0, 0, 1.0)!important;
+}
+
+.ant-menu-no-line {
+  border-bottom: none!important;
+}
+
+.ant-card-cover {
+  background-color: @primary-color;
+}
+
+.ant-card-meta-title {
+  font-family: Messer;
+  text-transform: uppercase;
+  font-size: 23px;
+}
+
+.ant-card-meta-description {
+  font-family: Suisse;
+}
+
+.ant-btn {
+  font-family: Messer;
+  text-transform: uppercase;
+  font-size: 23px;
+  text-shadow: none;
+  color: @accent-color;
+  line-height: 1.2;
+}
+
+@primary-color: #EDFF38;                         // primary color for all components
+@primary-dark-color: #bfcc2f;                         // primary color for all components
+@accent-color: #000;
+@text-color: @accent-color;
+@text-color-secondary: @accent-color;
+@menu-bg: @primary-color;
+@layout-header-color: @primary-color;
+@layout-header-background: @primary-color;
+@component-background: #FFF;
+
+@layout-body-background: #F5F5F5;
+
+@popover-background: #F6EAD1;
+
+
+.ant-layout-header {
+  background: @primary-color;
+}
+
+.ant-btn-primary {
+  background: @primary-color;
+  border-color: @primary-color;
+}
+
+.ant-btn-primary:hover, .ant-btn-primary:focus {
+  background: @primary-dark-color;
+  border-color: @primary-dark-color;
+}
+// Border color
+//@border-color-base: @accent-color; // base border outline a component
+//@border-color-split: @accent-color; // split border inside a component
+
