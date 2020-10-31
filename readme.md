@@ -2,14 +2,13 @@
   <img align="center" width="50%" src="/src/vectors/rxc-logo.svg">
 </p>
 
-# RadicalxChange Openfund - Quadratic Funding App
+# Openfund - Quadratic Funding App
 > by **Nestor Bonilla**
 
-The bounty scope is to build a Quadratic Funding app for RadicalxChange Foundation, called RadicalxChange Openfund.
+The bounty scope is to build a Quadratic Funding app for RadicalxChange Foundation.
 
 ## Link
-* [Website](https://link)
-* [Website guideline](https://link)
+* [Website](https://openfund.netlify.app)
 
 ### Prerequisites
 

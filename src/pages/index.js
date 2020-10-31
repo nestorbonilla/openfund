@@ -13,7 +13,6 @@ function Index() {
     const [initiatives, setInitiatives] = useState([]);
 
     const length = 200;
-    const role = 'organization';
     
     //getData();
 

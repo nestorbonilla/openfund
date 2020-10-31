@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Row, Col, Card, Avatar, Tabs, Tag, Table, Tooltip, Modal, Divider, Typography, Progress } from 'antd';
+import { Button, Row, Col, Card, Avatar, Table, Tooltip } from 'antd';
 import { CalendarOutlined, TagOutlined } from '@ant-design/icons';
 import GlobalLayout from '../components/globalLayout';
 import initiativeAvatar from '../images/initiative_avatar.png';
 import netlifyIdentity from 'netlify-identity-widget';
 
-const { TabPane } = Tabs;
-const { Title, Paragraph } = Typography;
 const { Meta } = Card;
 
 function Account() {
 
     const user = netlifyIdentity.currentUser();
     const [donations, setDonations] = useState([]);
-
-    const [modalVisible, setModalVisible] = useState(false);
-    const [donationModalVisible, setDonationModalVisible] = useState(false);
 
     useEffect(() => {   
         const fetchData = async () => {

@@ -1,5 +1,4 @@
 import React from 'react';
-//import netlifyIdentity from 'netlify-identity-widget';
 import { Layout } from 'antd';
 import { Global, css } from '@emotion/core';
 import Helmet from 'react-helmet';
@@ -12,10 +11,6 @@ const { Content, Footer } = Layout;
 
 function GlobalLayout({children}) {
 
-    //netlifyIdentity.open(); // open the modal
-    //const user = netlifyIdentity.currentUser();
-    //console.log('current user, ', user);
-    //const [showLoginModal, setShowLoginModal] = useState(false);
     const { title, description } = useSiteMetadata();
 
     return (

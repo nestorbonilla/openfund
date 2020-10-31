@@ -6,7 +6,15 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
         initiatives {
           id
           title
+          category
           description
+          status
+          deadline
+          goal
+          fbUrl
+          igUrl
+          webUrl
+          mainImage
         }
       }
     }

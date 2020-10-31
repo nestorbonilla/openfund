@@ -60,13 +60,5 @@ module.exports = {
           }
         }
       }
-      // {
-      //   resolve: 'gatsby-source-graphql',
-      //   options: {
-      //     typeName: 'hasura',
-      //     fieldName: 'initiatives',
-      //     url: "https://openfund.netlify.app/.netlify/functions/initiatives",
-      //   }
-      // }
     ]
 }

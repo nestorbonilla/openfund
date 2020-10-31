@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
-import { Button, Row, Col, Card, Avatar, Tabs, Tag, Table, Carousel, Tooltip, Modal, Divider, Typography, Progress } from 'antd';
-import { CalendarOutlined, TagOutlined } from '@ant-design/icons';
+import React from 'react';
+import { Result } from 'antd';
+import { Link } from 'gatsby';
 import GlobalLayout from '../components/globalLayout';
 
 function Success() {
-
   return (
     <GlobalLayout>
-        <div>Thank you</div>
+      <Result
+        status="success"
+        title="Successfully donated a Quadratic Fund Initiative!"
+        subTitle="Thank you for your support. A confirmation was sent to your email."
+        extra={[
+          <Link className="ant-btn ant-btn-link" type="primary" key="console" to="/">
+            Fund More Initiatives
+          </Link>
+        ]}
+      />
     </GlobalLayout>
   )
 }
