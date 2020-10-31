@@ -80,12 +80,12 @@ function Index() {
                         <Progress strokeColor="#000" style={{paddingLeft: "24px", paddingRight: "24px"}} percent={50} status="active" />
                         </Tooltip>,
                         <Tooltip placement="bottom" title="fund initiative">
-                        <Link to={'/initiative:' + item.id}><DollarOutlined key="fund" /></Link>
+                        <Link to={'/initiative/' + item.id}><DollarOutlined key="fund" /></Link>
                         </Tooltip>
                     ]}
                     >
                     <Meta
-                        title={<Link style={{color: "#000"}} to={'/initiative:' + item.id}>{item.title}</Link>}
+                        title={<Link style={{color: "#000"}} to={'/initiative/' + item.id}>{item.title}</Link>}
                         description={
                         <div className="opportunity-detail-card">
                             <Row justify="space-between">

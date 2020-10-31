@@ -5,7 +5,6 @@ import GlobalLayout from '../components/globalLayout';
 
 function Success() {
 
-
   return (
     <GlobalLayout>
         <div>Thank you</div>

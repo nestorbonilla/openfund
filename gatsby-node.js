@@ -1,12 +1,27 @@
-exports.onCreatePage = async ({ page, actions }) => {
-    const { createPage } = actions;
+exports.createPages = async ({ actions: { createPage }, graphql }) => {
   
-    // page.matchPath is a special key that's used for matching pages
-    // only on the client.
-    if (page.path.match(/^\/app/)) {
-      page.matchPath = "/app/*";
-  
-      // Update the page.
-      createPage(page);
+  const result = await graphql(`
+    {
+      hasura {
+        initiatives {
+          id
+          title
+          description
+        }
+      }
     }
+  `);
+
+  const data = result.data.hasura.initiatives;
+  console.log('initiative graphql ', data);
+
+  data.forEach(item => {
+    createPage({
+      path: `/initiative/${item.id}/`,
+      component: require.resolve('./src/templates/initiative'),
+      context: {
+        id: item.id
+      }
+    })
+  })
 }

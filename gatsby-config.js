@@ -1,4 +1,6 @@
 const lessToJson = require('less-to-json');
+const fetch = require('node-fetch');
+const { createHttpLink } = require('apollo-link-http')
 
 module.exports = {
     siteMetadata: {
@@ -41,6 +43,30 @@ module.exports = {
           generateStatsFile: true,
           analyzerMode: 'static'
         }
-      }      
+      },
+      {
+        resolve: 'gatsby-source-graphql',
+        options: {
+          typeName: 'hasura',
+          fieldName: 'hasura',
+          createLink: () => {
+            return createHttpLink({            
+              uri: process.env.HASURA_API_URL,
+              headers: {
+                'X-Hasura-Admin-Secret': process.env.HASURA_ADMIN_SECRET
+              },
+              fetch
+            })
+          }
+        }
+      }
+      // {
+      //   resolve: 'gatsby-source-graphql',
+      //   options: {
+      //     typeName: 'hasura',
+      //     fieldName: 'initiatives',
+      //     url: "https://openfund.netlify.app/.netlify/functions/initiatives",
+      //   }
+      // }
     ]
 }
