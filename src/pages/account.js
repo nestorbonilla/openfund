@@ -50,19 +50,19 @@ function Account() {
     {
       key: '1',
       id: '1',
-      name: 'New York No. 1 Lake Park',
+      name: 'Donation 1',
       tags: '200',
     },
     {
       key: '2',
       id: '2',
-      name: 'London No. 1 Lake Park',
+      name: 'Donation 2',
       tags: '500',
     },
     {
       key: '3',
       id: '3',
-      name: 'Sidney No. 1 Lake Park',
+      name: 'Donation 3',
       tags: '100',
     },
   ];
@@ -89,7 +89,7 @@ function Account() {
                 >
                     <Meta
                     avatar={<Avatar src={initiativeAvatar} />}
-                    title={user.user_metadata.full_name}
+                    title={user && user.user_metadata.full_name}
                     description={
                         <div className="opportunity-detail-card">
                             <Row justify="space-between" style={{marginBottom: "8px"}}>
@@ -99,7 +99,7 @@ function Account() {
                                 </Tooltip>
                                 </Col>
                                 <Col span={22}>
-                                {user.email}
+                                {user && user.email}
                                 </Col>
                             </Row>
                             <Row justify="space-between">
@@ -108,7 +108,7 @@ function Account() {
                                     <TagOutlined />
                                 </Tooltip>
                                 </Col>
-                                <Col span={22}>{user.created_at}</Col>
+                                <Col span={22}>{user && user.created_at}</Col>
                             </Row>
                         </div>
                     }
