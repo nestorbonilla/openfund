@@ -1,0 +1,18 @@
+[
+    {
+        "sku": "RXC001",
+        "name": "Initiative 1",
+        "description": "First initiative",
+        "image": "",
+        "amount": 300,
+        "currency": "USD"
+    },
+    {
+        "sku": "RXC002",
+        "name": "Initiative 3",
+        "description": "Second initiative",
+        "image": "",
+        "amount": 350,
+        "currency": "USD"
+    }
+]

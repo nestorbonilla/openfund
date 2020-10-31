@@ -8,7 +8,9 @@ const { Header } = Layout;
 
 function HeaderMenu() {
 
-  const user = netlifyIdentity.currentUser();
+  const [user, setUser] = useState(netlifyIdentity.currentUser());
+  netlifyIdentity.on('login', user => setUser(user));
+  netlifyIdentity.on('logout', () => setUser(null));
 
   return (
     <Header className='header'>

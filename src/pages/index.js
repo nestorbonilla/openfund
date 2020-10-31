@@ -51,7 +51,7 @@ function Index() {
                     justifyContent: "space-between",
                     marginBottom: 20
                 }}>
-                    <div></div>
+                    {/* <div></div>
                     {role === "organization" && (
                     <div style={{marginRight: "24px"}}>
                         <Button
@@ -59,10 +59,10 @@ function Index() {
                         icon={<PlusCircleOutlined />}
                         data-testid="add-contact-button"
                         >
-                        <Link style={{color: "#000", fontFamily: "Messer", textTransform: "uppercase", fontSize: "18px", padding:"20px"}} to="/opportunityedit:0">Create</Link>
+                        <Link style={{color: "#000", fontFamily: "Suisse", textTransform: "uppercase", fontSize: "15px", padding:"20px"}} to="/opportunityedit:0">Create</Link>
                         </Button>
                     </div>
-                    )}              
+                    )}               */}
                 </div>
                 }
                 renderItem={item => (

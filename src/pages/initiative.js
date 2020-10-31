@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { Button, Row, Col, Card, Avatar, Tabs, Tag, Table, Carousel, Tooltip, Modal, Divider, Typography, Progress } from 'antd';
+import { Button, Row, Col, Card, Avatar, Tag, Carousel, Tooltip, Modal, Divider, Typography, Progress } from 'antd';
 import { CalendarOutlined, TagOutlined } from '@ant-design/icons';
 import GlobalLayout from '../components/globalLayout';
 import DonationModal from '../components/donationModal';
 import initiativeAvatar from '../images/initiative_avatar.png';
 import fetch from 'node-fetch';
+import { loadStripe } from '@stripe/stripe-js';
 
-const { TabPane } = Tabs;
 const { Title, Paragraph } = Typography;
 const { Meta } = Card;
 
 function Initiative({id}) {
 
   const [modalVisible, setModalVisible] = useState(false);
-
   const [donationModalVisible, setDonationModalVisible] = useState(false);
+  const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
 
   const createDonation = async (values) => {
     console.log('values to send: ', values);
@@ -26,16 +26,47 @@ function Initiative({id}) {
       setDonationModalVisible(false);
     });
   }
+
   const onDonationModalCreate = (values) => {    
+     createCheckout(values);
+  };
+
+  const createCheckout = async (values) => {    
     const donation = {
       id: "3",
       initiativeId: "2",
       email: values.email,
       amount: values.amount,
       time: "11-20-2020"
-    };    
-    createDonation(donation);    
-  };
+    };
+    const response = await fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(donation)
+    }).then(res => res.json());
+
+    // console.log("donation session, ", response);
+    // console.log("publishable key ", process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
+    
+    const stripe = await stripePromise;
+    const { error } = await stripe.redirectToCheckout({
+      sessionId: response.sessionId,
+    });
+
+    if (error) {
+      // If `redirectToCheckout` fails due to a browser or network
+      // error, display the localized error message to your customer
+      // using `result.error.message`.
+      console.log('stripe error', error);
+    }
+
+    //console.log('Checkout response: ', response);
+      //console.log('Received response: ', response);
+      //createDonation(donation);      
+    //});
+  }
 
   const initiative = {
       title: "some"
@@ -136,7 +167,7 @@ function Initiative({id}) {
             <Tooltip placement="bottom" title="views">
                 <Row justify="center">
                     <Col span={12}>
-                        <Button type="primary"                          
+                        <Button type="primary"
                           block
                           onClick={() => setDonationModalVisible(true)}>
                           Fund Initiative
@@ -212,18 +243,6 @@ function Initiative({id}) {
             setDonationModalVisible(false);
           }}
         />
-      <Tabs defaultActiveKey="1" centered={true}>
-        <TabPane tab="Pre requirements" key={1}>
-          <Table
-            columns={columns}
-            dataSource={data}
-            key={data.id}
-          />
-        </TabPane>
-        <TabPane tab="Post requirements" key={2}>
-          Content of Tab Pane 2
-        </TabPane>
-      </Tabs>
     </GlobalLayout>
   )
 }
