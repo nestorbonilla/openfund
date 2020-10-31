@@ -26,7 +26,6 @@
     "gatsby-plugin-antd": "^2.2.0",
     "gatsby-plugin-emotion": "^4.3.14",
     "gatsby-plugin-less": "^4.0.6",
-    "gatsby-plugin-netlify-identity": "^0.0.3",
     "gatsby-plugin-react-helmet": "^3.3.14",
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-webpack-bundle-analyzer": "^1.0.5",
@@ -38,6 +37,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
+    "react-netlify-identity": "^0.2.5",
     "react-netlify-identity-widget": "^0.2.7"
   },
   "devDependencies": {
@@ -46,6 +46,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/nestorbonilla/gitxchange2"
+    "url": "https://github.com/nestorbonilla/openfund"
   }
 }

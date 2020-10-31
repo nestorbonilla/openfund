@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
+import IdentityModal from 'react-netlify-identity-widget';
 import { Link } from 'gatsby';
 import Logo from '../vectors/isotype.svg';
 
@@ -9,6 +10,8 @@ const role = "logged";
 function HeaderMenu({
   handleLoginModal
 }) {
+
+  const [showDialog, setShowDialog] = useState(false)
 
   return (
     <Header className='header'>
@@ -25,12 +28,17 @@ function HeaderMenu({
           </Menu.Item>
         }
         <Menu.Item key="3" className="ant-menu-no-line" style={{float: 'right'}}>
-          <Link
+          <button onClick={() => setShowDialog(true)}>Log In</button>
+          {/* <Link
             className='nav-link'
             to='/'
-            onClick={handleLoginModal}>Login</Link>
+            onClick={() => setShowDialog(true)}>Login</Link> */}
         </Menu.Item>
       </Menu>
+      <IdentityModal
+        showDialog={showDialog}
+        onCloseDialog={() => setShowDialog(false)}
+      />
     </Header>
   );
 }

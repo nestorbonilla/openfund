@@ -40,12 +40,6 @@ module.exports = {
           generateStatsFile: true,
           analyzerMode: 'static'
         }
-      },
-      {
-        resolve: 'gatsby-plugin-netlify-identity',
-        options: {
-          url: `https://openfund.netlify.com/` // required!
-        }
       }
     ]
 }
