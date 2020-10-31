@@ -26,19 +26,19 @@
     "gatsby-plugin-antd": "^2.2.0",
     "gatsby-plugin-emotion": "^4.3.14",
     "gatsby-plugin-less": "^4.0.6",
+    "gatsby-plugin-netlify-identity-widget": "^1.1.1",
     "gatsby-plugin-react-helmet": "^3.3.14",
     "gatsby-plugin-react-svg": "^3.0.0",
     "gatsby-plugin-webpack-bundle-analyzer": "^1.0.5",
     "less": "^3.12.2",
     "less-to-json": "^1.2.0",
     "mailgun-js": "^0.22.0",
+    "netlify-identity-widget": "^1.9.1",
     "node-fetch": "^2.6.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "react-helmet": "^6.1.0",
-    "react-netlify-identity": "^0.2.5",
-    "react-netlify-identity-widget": "^0.2.7"
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "cross-env": "^6.0.3",

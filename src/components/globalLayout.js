@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-    useNetlifyIdentity,
-    IdentityContextProvider,
-  } from 'react-netlify-identity-widget';
-  import 'react-netlify-identity-widget/styles.css';
+//import netlifyIdentity from 'netlify-identity-widget';
 import { Layout } from 'antd';
 import { Global, css } from '@emotion/core';
 import Helmet from 'react-helmet';
@@ -16,8 +12,9 @@ const { Content, Footer } = Layout;
 
 function GlobalLayout({children}) {
 
-    const identity = useNetlifyIdentity("https://openfund.netlify.app/.netlify/identity");
-
+    //netlifyIdentity.open(); // open the modal
+    //const user = netlifyIdentity.currentUser();
+    //console.log('current user, ', user);
     //const [showLoginModal, setShowLoginModal] = useState(false);
     const { title, description } = useSiteMetadata();
 
@@ -32,17 +29,16 @@ function GlobalLayout({children}) {
                 <title>{title}</title>
                 <meta name="description" content={description} />
             </Helmet>
-            <IdentityContextProvider value={identity}>
-                <Layout style={{ minHeight: '100vh' }}>
-                    <HeaderMenu />                    
-                    <Layout className="site-layout">
-                        <Content >
-                            <main>{children}</main>                        
-                        </Content>
-                    </Layout>
-                    <Footer style={{ textAlign: 'center' }}>RadicalxChange © {new Date().getFullYear()}</Footer>
+            <Layout style={{ minHeight: '100vh' }}>
+                <HeaderMenu />    
+                <div id="netlify-modal"></div>                
+                <Layout className="site-layout">
+                    <Content >
+                        <main>{children}</main>                        
+                    </Content>
                 </Layout>
-            </IdentityContextProvider>
+                <Footer style={{ textAlign: 'center' }}>RadicalxChange © {new Date().getFullYear()}</Footer>
+            </Layout>
         </>
     );
 }

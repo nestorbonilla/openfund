@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
+import netlifyIdentity from 'netlify-identity-widget';
 import { Layout, Menu } from 'antd';
-import IdentityModal from 'react-netlify-identity-widget';
 import { Link } from 'gatsby';
 import Logo from '../vectors/isotype.svg';
 
 const { Header } = Layout;
-const role = "logged";
 
-function HeaderMenu({
-  handleLoginModal
-}) {
+function HeaderMenu() {
 
-  const [showDialog, setShowDialog] = useState(false)
+  const user = netlifyIdentity.currentUser();
 
   return (
     <Header className='header'>
@@ -22,23 +19,20 @@ function HeaderMenu({
         <Menu.Item key="1">
           <Link className='nav-link' to='/'>Home</Link>
         </Menu.Item>
-        {role === 'logged' && 
+        {user && 
           <Menu.Item key="2">
             <Link className='nav-link' to="/account">Account</Link>
           </Menu.Item>
         }
-        <Menu.Item key="3" className="ant-menu-no-line" style={{float: 'right'}}>
-          <button onClick={() => setShowDialog(true)}>Log In</button>
-          {/* <Link
-            className='nav-link'
-            to='/'
-            onClick={() => setShowDialog(true)}>Login</Link> */}
-        </Menu.Item>
+        { user &&
+          <Menu.Item key="3" className="ant-menu-no-line" style={{float: 'right'}}>
+            <a className='nav-link' onClick={() => netlifyIdentity.logout()}>Logout</a>
+          </Menu.Item>
+        || <Menu.Item key="3" className="ant-menu-no-line" style={{float: 'right'}}>
+            <a className='nav-link' onClick={() => netlifyIdentity.open()}>Login</a>
+          </Menu.Item>
+        }        
       </Menu>
-      <IdentityModal
-        showDialog={showDialog}
-        onCloseDialog={() => setShowDialog(false)}
-      />
     </Header>
   );
 }

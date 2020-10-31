@@ -9,6 +9,7 @@ module.exports = {
     plugins: [
       'gatsby-plugin-emotion',
       'gatsby-plugin-react-helmet',
+      'gatsby-plugin-netlify-identity-widget',
       {
         resolve: 'gatsby-plugin-antd',
         options: {
@@ -40,6 +41,6 @@ module.exports = {
           generateStatsFile: true,
           analyzerMode: 'static'
         }
-      }
+      }      
     ]
 }
