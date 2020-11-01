@@ -11,7 +11,6 @@ function Account() {
     const [donations, setDonations] = useState([]);
 
     useEffect(() => {
-      //console.log('user ', user);
       //if (user) {
         const fetchData = async () => {
           const response = await fetch('/.netlify/functions/donations').then((res) => res.json());
@@ -38,7 +37,6 @@ function Account() {
       title: 'Initiative',
       dataIndex: 'name',
       key: 'name',
-      render: text => <a href="/">{text}</a>,
     },
     {
       title: 'Funding',
@@ -48,7 +46,6 @@ function Account() {
   ];
 
   const data = () => {
-    console.log('donations ', donations);
     let donationsTable = []; 
     if (donations) {
       donations.forEach(donation => {
@@ -63,27 +60,6 @@ function Account() {
     }    
     return donationsTable;
   }
-
-  // const data = [
-  //   {
-  //     key: '1',
-  //     id: '1',
-  //     name: 'Donation 1',
-  //     tags: '200',
-  //   },
-  //   {
-  //     key: '2',
-  //     id: '2',
-  //     name: 'Donation 2',
-  //     tags: '500',
-  //   },
-  //   {
-  //     key: '3',
-  //     id: '3',
-  //     name: 'Donation 3',
-  //     tags: '100',
-  //   },
-  // ];
 
   return (
     <GlobalLayout>

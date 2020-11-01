@@ -6,6 +6,7 @@ module.exports = {
     siteMetadata: {
         title: 'RxC Openfund',
         description: 'RadicalxChange Openfund platform',
+        url: 'https://openfund.netlify.app',
         author: 'Nestor Bonilla',
       },
     plugins: [

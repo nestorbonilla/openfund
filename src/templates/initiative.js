@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Row, Col, Card, Tag, Image, Carousel, Tooltip, Divider, Typography, Progress } from 'antd';
+import { Button, Row, Col, Card, Tag, Image, Carousel, Divider, Typography, Progress } from 'antd';
 import { graphql } from 'gatsby';
 import { FacebookOutlined, InstagramOutlined, ChromeOutlined } from '@ant-design/icons';
 import GlobalLayout from '../components/globalLayout';
@@ -7,6 +7,7 @@ import InformationModal from '../components/informationModal';
 import DonationModal from '../components/donationModal';
 import fetch from 'node-fetch';
 import { loadStripe } from '@stripe/stripe-js';
+import netlifyIdentity from 'netlify-identity-widget';
 
 const { Title, Paragraph } = Typography;
 const { Meta } = Card;
@@ -36,11 +37,20 @@ export const query = graphql`
 
 function Initiative({ data }) {
 
+  const user = netlifyIdentity.currentUser();
   const initiative = data.hasura.initiatives;
-  console.log('graphql data', initiative);
   const [informationModalVisible, setInformationModalVisible] = useState(false);
   const [donationModalVisible, setDonationModalVisible] = useState(false);
   const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
+  const [matchingText, setMatchingText] = useState(mT5);
+  const [amountToDonate, setAmountToDonate] = useState(5);
+
+  const mT5 = `* for a donation of $ 5 the matchind fund will be $ ${Math.round(Math.pow((initiative.sumOfRoots + Math.sqrt(5)), 2) - initiative.pledgeAmount)}`;
+  const mT10 = `* for a donation of $ 10 the matchind fund will be $ ${Math.round(Math.pow((initiative.sumOfRoots + Math.sqrt(10)), 2) - initiative.pledgeAmount)}`;
+  const mT25 = `* for a donation of $ 25 the matchind fund will be $ ${Math.round(Math.pow((initiative.sumOfRoots + Math.sqrt(25)), 2) - initiative.pledgeAmount)}`;
+  const mT50 = `* for a donation of $ 50 the matchind fund will be $ ${Math.round(Math.pow((initiative.sumOfRoots + Math.sqrt(50)), 2) - initiative.pledgeAmount)}`;
+  const mT75 = `* for a donation of $ 75 the matchind fund will be $ ${Math.round(Math.pow((initiative.sumOfRoots + Math.sqrt(75)), 2) - initiative.pledgeAmount)}`;
+  const mT100 = `* for a donation of $ 100 the matchind fund will be $ ${Math.round(Math.pow((initiative.sumOfRoots + Math.sqrt(100)), 2) - initiative.pledgeAmount)}`;
 
   const createDonation = async (values) => {
     console.log('values to send: ', values);
@@ -88,30 +98,41 @@ function Initiative({ data }) {
     }
   }
 
+  const startDonationProcess = (amount) => {
+    console.log('starting donation process with an amount of ', amount);
+    if (user && amount > 0) {
+      onDonationModalCreate({email: user.email, amount: amount});
+    } else {
+      setAmountToDonate(amount);
+      
+      console.log('verify updated amount of ', amount);
+      setDonationModalVisible(true);
+    }
+  }
+
+  // const updateMatchingText = (donation, sumOfRoots, pledgeAmount) => {
+  //   const matchingFund = Math.pow((sumOfRoots + Math.sqrt(donation)), 2) - pledgeAmount;
+  //   const matchingText = `* for a donation of $ ${donation} the matchind fund is $ ${matchingFund}`;
+  //   setMatchingText(matchingText);
+  // }
+
+  // const updateMatchingText = (donation) => {  
+  //   const matchingFund = Math.pow((initiative.sumOfRoots + Math.sqrt(donation)), 2) - initiative.pledgeAmount;
+  //   const matchingText = `* for a donation of $ ${donation} the matchind fund is $ ${matchingFund}`;
+  //   setMatchingText(matchingText);
+  // }
+
   return (
     <GlobalLayout>      
         <Card
           style={{ width: '100%' }}
           cover={
-          <Carousel>
-            <div className='banner-image'> 
-              <Image src={initiative.mainImage} />
-            </div>
-          </Carousel>
+            <Carousel>
+              <div className='banner-image'> 
+                <Image src={initiative.mainImage} />
+              </div>
+            </Carousel>
           }
-          actions={[
-          <Tooltip placement="bottom" title="views">
-            <Row justify="center">
-              <Col span={12}>
-                <Button type="primary"
-                  block
-                  onClick={() => setDonationModalVisible(true)}>
-                  Fund Initiative
-                </Button>
-              </Col>
-            </Row>
-          </Tooltip>
-          ]}
         >
           <Meta
             title={initiative.title}
@@ -168,8 +189,56 @@ function Initiative({ data }) {
                       <Col span={5} offset={14}>
                         <div>$ {initiative.goal} goal</div>
                       </Col>
-                    </Row>
+                    </Row>                    
                     <Button type="link" style={{width: "100%"}} onClick={() => setInformationModalVisible(true)}>Learn how our donation matching works</Button>
+                    <Divider />
+                    <Row justify="center">
+                      <Col span={3}>
+                        <Button type="primary" block
+                          onClick={() => startDonationProcess(5)}
+                          onMouseEnter={() => setMatchingText(mT5)}
+                        >$ 5</Button>
+                      </Col>
+                      <Col span={3} offset={1}>
+                        <Button type="primary" block 
+                          onClick={() => startDonationProcess(10)}
+                          onMouseEnter={() => setMatchingText(mT10)}>$ 10</Button>
+                      </Col>
+                      <Col span={3} offset={1}>
+                        <Button type="primary" block
+                          onClick={() => startDonationProcess(25)}
+                          onMouseEnter={() => setMatchingText(mT25)}>$ 25</Button>
+                      </Col>
+                      <Col span={3} offset={1}>
+                        <Button type="primary" block
+                          onClick={() => startDonationProcess(50)}
+                          onMouseEnter={() => setMatchingText(mT50)}>$ 50</Button>
+                      </Col>
+                      <Col span={3} offset={1}>
+                        <Button type="primary" block
+                          onClick={() => startDonationProcess(75)}
+                          onMouseEnter={() => setMatchingText(mT75)}>$ 75</Button>
+                      </Col>
+                      <Col span={3} offset={1}>
+                        <Button type="primary" block
+                          onClick={() => startDonationProcess(100)}
+                          onMouseEnter={() => setMatchingText(mT100)}>$ 100</Button>
+                      </Col>
+                    </Row>
+                    <br />
+                    <Row justify="space-between">
+                      <Col span={23}>{matchingText}</Col>
+                    </Row>
+                    <br />
+                    <Row justify="center">
+                      <Col span={23}>
+                        <Button type="primary"
+                          block
+                          onClick={() => setDonationModalVisible(true)}>
+                          Custom donation
+                        </Button>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
               </div>
@@ -182,13 +251,15 @@ function Initiative({ data }) {
             setInformationModalVisible(false);
           }}
         />
-        <DonationModal
+        {donationModalVisible && <DonationModal
           visible={donationModalVisible}
           onCreate={onDonationModalCreate}
+          emailText={user && user.email}
+          amountText={amountToDonate}
           onCancel={() => {
             setDonationModalVisible(false);
           }}
-        />
+        />}
     </GlobalLayout>
   )
 }

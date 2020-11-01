@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Tag, Card, List, Tooltip, Button, Progress } from 'antd';
-import { PlusCircleOutlined, DollarOutlined } from '@ant-design/icons';
+import { Row, Col, Tag, Card, List, Tooltip, Progress } from 'antd';
+import { DollarOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
 import GlobalLayout from '../components/globalLayout';
-// import initiativeAvatar from "../images/initiative_avatar.png";
-// import initiativeImage from "../images/initiative_detail.png";
 
 const { Meta } = Card;
 
@@ -14,8 +12,6 @@ function Index() {
 
     const length = 200;
     
-    //getData();
-
     useEffect(() => {   
         const fetchData = async () => {
             const data = await fetch('/.netlify/functions/initiatives')
@@ -46,13 +42,13 @@ function Index() {
                 }}>
                     <div></div>
                     <div style={{marginRight: "24px"}}>
-                        <Button
+                        {/* <Button
                         type="primary"
                         icon={<PlusCircleOutlined />}
                         data-testid="add-contact-button"
                         >
                         <Link style={{color: "#000", fontFamily: "Suisse", textTransform: "uppercase", fontSize: "15px", padding:"20px"}} to="/opportunityedit:0">Create</Link>
-                        </Button>
+                        </Button> */}
                     </div>
                 </div>
                 }

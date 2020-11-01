@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, InputNumber, Modal } from 'antd';
 
-const DonationModal = ({ visible, onCreate, onCancel }) => {
+const DonationModal = ({ visible, onCreate, onCancel, emailText, amountText }) => {
   const [form] = Form.useForm();
+  const [email, setEmail] = useState(emailText);
+  const [amount, setAmount] = useState(amountText);
+  
   return (
     <Modal
       visible={visible}
@@ -41,7 +44,10 @@ const DonationModal = ({ visible, onCreate, onCancel }) => {
             },
           ]}
         >
-          <Input />
+          <Input
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
         </Form.Item>
         <Form.Item
           name="amount"
@@ -57,7 +63,10 @@ const DonationModal = ({ visible, onCreate, onCancel }) => {
               message: 'Please input your amount',
             }
           ]}>
-          <InputNumber />
+          <InputNumber
+            value={amount}
+            onChange={e => setAmount(e.target.value)}
+          />
         </Form.Item>
       </Form>
     </Modal>

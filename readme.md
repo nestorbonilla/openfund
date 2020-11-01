@@ -9,6 +9,7 @@ The bounty scope is to build a Quadratic Funding app for RadicalxChange Foundati
 
 ## Link
 * [Website](https://openfund.netlify.app)
+* [Video pitch](https://comming)
 
 ### Prerequisites
 
