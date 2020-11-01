@@ -5,9 +5,9 @@ exports.handler = async () => {
         query: `
             query {
                 donations {
+                    id
                     amount
                     email
-                    id
                     initiative
                     time
                 }

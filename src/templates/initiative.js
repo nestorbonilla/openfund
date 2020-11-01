@@ -41,6 +41,7 @@ function Initiative({ data }) {
 
   const createDonation = async (values) => {
     console.log('values to send: ', values);
+    
     await fetch('/.netlify/functions/add-donation', {
       method: 'POST',      
       body: JSON.stringify(values)
@@ -50,26 +51,27 @@ function Initiative({ data }) {
     });
   }
 
-  const onDonationModalCreate = (values) => {    
-     createCheckout(values);
+  const onDonationModalCreate = (values) => {
+
+    const donation = {
+      initiative: initiative.title,
+      email: values.email,
+      amount: values.amount,
+      image: initiative.mainImage
+    };
+
+    createDonation(donation);
+    createCheckout(donation);
   };
 
   const createCheckout = async (values) => {
-    
-    const donation = {
-      id: "3",
-      initiativeId: "2",
-      email: values.email,
-      amount: values.amount,
-      time: "11-20-2020"
-    };
     
     const response = await fetch('/.netlify/functions/create-checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(donation)
+      body: JSON.stringify(values)
     }).then(res => res.json());
 
     const stripe = await stripePromise;
@@ -81,10 +83,6 @@ function Initiative({ data }) {
     if (error) {
       console.log('stripe error', error);
     }
-  }
-
-  const styles = {
-    backgroundImage: `linear-gradient(to bottom, rgba(42, 131, 197, 0.8), rgba(42, 131, 197, 0.8)), url(${initiative.mainImage})`
   }
 
   return (

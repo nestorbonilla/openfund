@@ -5,6 +5,11 @@ const endpointSecret = 'whsec_q9RQngX24nG49RaT4P3nZIfHylKOPx9Y';
 
 exports.handler = async ({ headers, body }) => {
     const sig = headers['stripe-signature'];
+    const mailgun = require('mailgun-js');
+    const mg = mailgun({
+        apiKey: process.env.MAILGUN_API_KEY,
+        domain: process.env.MAILGUN_DOMAIN
+    });
     let event;
     try {
         event = stripe.webhooks.constructEvent(body, sig, endpointSecret);    
@@ -18,33 +23,35 @@ exports.handler = async ({ headers, body }) => {
     // Handle the event
     switch (event.type) {
         case 'payment_intent.succeeded':
+            
             const paymentIntent = event.data.object;
 
-            const { amount, email, initiative } = paymentIntent;
+            let { amount, email, initiative } = paymentIntent;
             amount = amount / 100;
-            email = "nbonilla@digitabonds.org";
-            initiative = "Testing";
+            // email = "nbonilla@digitabonds.org";
+            // initiative = "Testing";
+            // amount = amount + "";
 
-            const result = await query({
-                query: `
-                    mutation ($amount: String!, $email: String!, $initiative: String!) {
-                        insert_donations_one(object: {amount: $amount, email: $email, initiative: $initiative}) {
-                            amount
-                            email
-                            id
-                            initiative
-                            time
-                        }
-                    }
-                `,
-                variables: { amount, email, initiative }
-            });
+            // const result = await query({
+            //     query: `
+            //         mutation ($amount: String!, $email: String!, $initiative: String!) {
+            //             insert_donations_one(object: {amount: $amount, email: $email, initiative: $initiative}) {
+            //                 amount
+            //                 email
+            //                 id
+            //                 initiative
+            //                 time
+            //             }
+            //         }
+            //     `,
+            //     variables: { amount, email, initiative }
+            // });
 
             const emailToSend = {
                 from: 'Nestor Bonilla <nestor.bonilla.s@gmail.com>',
                 to: `Funder <${email}>`,
                 subject: 'Openfund donation succesfull',
-                text: 'Thanks for your donation.'
+                text: `Thanks for your donation of $ ${amount} for ${initiative}.`
             };
             mg.messages().send(emailToSend, (error, response) => {
                 console.log('email response ', response);

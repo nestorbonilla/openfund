@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Tag, Card, List, Tooltip, Button, Progress } from 'antd';
-import { CalendarOutlined, TagOutlined, PlusCircleOutlined, DollarOutlined } from '@ant-design/icons';
+import { PlusCircleOutlined, DollarOutlined } from '@ant-design/icons';
 import { Link } from 'gatsby';
 import GlobalLayout from '../components/globalLayout';
 // import initiativeAvatar from "../images/initiative_avatar.png";
@@ -25,12 +25,6 @@ function Index() {
         fetchData();
     }, []);
 
-    const tags = (data) => (
-      data.map(tag => (
-          <Tag key={tag}>{tag}</Tag>
-      ))
-    )
-
     return (
         <GlobalLayout>
             <List
@@ -50,8 +44,7 @@ function Index() {
                     justifyContent: "space-between",
                     marginBottom: 20
                 }}>
-                    {/* <div></div>
-                    {role === "organization" && (
+                    <div></div>
                     <div style={{marginRight: "24px"}}>
                         <Button
                         type="primary"
@@ -61,49 +54,44 @@ function Index() {
                         <Link style={{color: "#000", fontFamily: "Suisse", textTransform: "uppercase", fontSize: "15px", padding:"20px"}} to="/opportunityedit:0">Create</Link>
                         </Button>
                     </div>
-                    )}               */}
                 </div>
                 }
                 renderItem={item => (
                 <List.Item>
                     <Card
-                    key={item.id}
-                    cover={
-                        <img
-                        alt={item.title}
-                        src={item.mainImage}
-                        />
-                    }
-                    actions={[
-                        <Tooltip placement="bottom" title="estimated">
-                        <Progress strokeColor="#000" style={{paddingLeft: "24px", paddingRight: "24px"}} percent={50} status="active" />
-                        </Tooltip>,
-                        <Tooltip placement="bottom" title="fund initiative">
-                        <Link to={'/initiative/' + item.id}><DollarOutlined key="fund" /></Link>
-                        </Tooltip>
-                    ]}
+                        key={item.id}
+                        cover={
+                            <img
+                                alt={item.title}
+                                src={item.mainImage}
+                            />
+                        }
+                        actions={[
+                            <Tooltip placement="bottom" title="estimated">
+                            <Progress strokeColor="#000" style={{paddingLeft: "24px", paddingRight: "24px"}} percent={50} status="active" />
+                            </Tooltip>,
+                            <Tooltip placement="bottom" title="fund initiative">
+                            <Link to={'/initiative/' + item.id}><DollarOutlined key="fund" /></Link>
+                            </Tooltip>
+                        ]}
                     >
                     <Meta
                         title={<Link style={{color: "#000"}} to={'/initiative/' + item.id}>{item.title}</Link>}
                         description={
                         <div className="opportunity-detail-card">
-                            <Row justify="space-between">
-                            <Col span={2}>
-                                <Tooltip placement="left" title="deadline">
-                                <CalendarOutlined />
-                                </Tooltip>
-                            </Col>
-                            <Col span={22}>
-                                {item.deadline}
-                            </Col>
+                            <Row justify="space-between" style={{marginBottom: "8px"}}>
+                                <Col span={24}>
+                                    {item.deadline}
+                                </Col>
                             </Row>
-                            <Row justify="space-between" style={{marginTop: "12px", marginBottom: "12px"}}>
-                            <Col span={2}>
-                                <Tooltip placement="left" title="tags">
-                                <TagOutlined />
-                                </Tooltip>
-                            </Col>
-                            <Col span={22}>categories</Col>
+                            <Row justify="space-between">
+                                <Col span={24}>
+                                    <span>
+                                        <Tag color={'yellow'} key={0} style={{marginBottom: "15px"}}>
+                                            {item.category.toUpperCase()}
+                                        </Tag>
+                                    </span>
+                                </Col>
                             </Row>
                             <Row justify="space-between">
                             <Col span={24}>{item.description.substring(0, length)}...</Col>

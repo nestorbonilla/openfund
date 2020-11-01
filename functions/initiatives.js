@@ -16,6 +16,7 @@ exports.handler = async () => {
                     mainImage
                     status
                     webUrl
+                    category
                 }
             }
           

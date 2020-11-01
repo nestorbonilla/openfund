@@ -21,7 +21,6 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
   `);
 
   const data = result.data.hasura.initiatives;
-  console.log('initiative graphql ', data);
 
   data.forEach(item => {
     createPage({

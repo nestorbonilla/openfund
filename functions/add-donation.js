@@ -8,7 +8,8 @@ exports.handler = async (event) => {
         domain: process.env.MAILGUN_DOMAIN
     });
 
-    const { amount, email, id, initiativeId, time } = JSON.parse(event.body);
+    let { amount, email, initiative } = JSON.parse(event.body);
+    amount = amount + "";
 
     const result = await query({
         query: `
@@ -29,7 +30,7 @@ exports.handler = async (event) => {
         from: 'Nestor Bonilla <nestor.bonilla.s@gmail.com>',
         to: `Funder <${email}>`,
         subject: 'Openfund donation succesfull',
-        text: 'Thanks for your donation.'
+        text: `Thanks for your donation of $ ${amount} for ${initiative}.`
     };
     mg.messages().send(emailToSend, (error, response) => {
         console.log(response);

@@ -1,6 +1,6 @@
 const { query } = require('./util/hasura');
 
-exports.handler = async ({ event }) => {
+exports.handler = async ( event ) => {
     const { email } = JSON.parse(event.body);
     const { donations } = await query({
         query: `
