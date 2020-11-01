@@ -8,14 +8,21 @@
 The bounty scope is to build a Quadratic Funding app for RadicalxChange Foundation.
 
 ## Link
-* [Website](https://openfund.netlify.app)
-* [Video pitch](https://comming)
+* [Live website](https://openfund.netlify.app)
+* [Video pitch](https://youtu.be/2V3W_JxUmlY)
 
 ### Prerequisites
 
 1. Have a text editor installed, i.e. [VSCode](https://code.visualstudio.com/)
 2. Have the Gatsby CLI (gatsby-cli) installed globally by running:
    `npm install -g gatsby-cli`
+
+## Technologies
+- [Gatsby](https://www.gatsbyjs.com)
+- [Hasura](https://hasura.io)
+- [Netlify](https://www.netlify.com)
+- [Mailgun](https://www.mailgun.com)
+- [Stripe](https://stripe.com)
 
 ## Environment Variables
 
