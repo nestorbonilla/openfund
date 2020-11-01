@@ -12,14 +12,21 @@ function Account() {
     const user = netlifyIdentity.currentUser();
     const [donations, setDonations] = useState([]);
 
-    useEffect(() => {   
+    useEffect(() => {
+      if (user) {
         const fetchData = async () => {
-            const data = await fetch('/.netlify/functions/donations')
-                .then((response) => response.json());
-                setDonations(data);
+          const response = await fetch('/.netlify/functions/donations-by-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(user)
+          }).then((res) => res.json());
+          setDonations(response);
+          console.log('donations by id ', response);
         }
         fetchData();
-        console.log(donations);
+      }      
     }, []);
   
   const columns = [
@@ -83,27 +90,22 @@ function Account() {
                     ]}
                 >
                     <Meta
-                    avatar={<Avatar src={initiativeAvatar} />}
                     title={user && user.user_metadata.full_name}
                     description={
                         <div className="opportunity-detail-card">
                             <Row justify="space-between" style={{marginBottom: "8px"}}>
-                                <Col span={2}>
-                                <Tooltip placement="left" title="deadline">
-                                    <CalendarOutlined />
+                                <Col span={24}>
+                                <Tooltip placement="left" title="email">
+                                    {user && user.email}
                                 </Tooltip>
-                                </Col>
-                                <Col span={22}>
-                                {user && user.email}
                                 </Col>
                             </Row>
                             <Row justify="space-between">
-                                <Col span={2}>
-                                <Tooltip placement="left" title="tags">
-                                    <TagOutlined />
-                                </Tooltip>
+                                <Col span={24}>
+                                  <Tooltip placement="left" title="account creation">
+                                      {user && user.created_at.split("T")[0]}
+                                  </Tooltip>
                                 </Col>
-                                <Col span={22}>{user && user.created_at}</Col>
                             </Row>
                         </div>
                     }
