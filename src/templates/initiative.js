@@ -42,8 +42,8 @@ function Initiative({ data }) {
   const [informationModalVisible, setInformationModalVisible] = useState(false);
   const [donationModalVisible, setDonationModalVisible] = useState(false);
   const stripePromise = loadStripe(process.env.GATSBY_STRIPE_PUBLISHABLE_KEY);
-  const [matchingText, setMatchingText] = useState(mT5);
-  const [amountToDonate, setAmountToDonate] = useState(5);
+  const [matchingText, setMatchingText] = useState('');
+  const [amountToDonate, setAmountToDonate] = useState(0);
 
   const mT5 = `* for a donation of $ 5 the matchind fund will be $ ${Math.round(Math.pow((initiative.sumOfRoots + Math.sqrt(5)), 2) - initiative.pledgeAmount)}`;
   const mT10 = `* for a donation of $ 10 the matchind fund will be $ ${Math.round(Math.pow((initiative.sumOfRoots + Math.sqrt(10)), 2) - initiative.pledgeAmount)}`;
@@ -109,18 +109,6 @@ function Initiative({ data }) {
       setDonationModalVisible(true);
     }
   }
-
-  // const updateMatchingText = (donation, sumOfRoots, pledgeAmount) => {
-  //   const matchingFund = Math.pow((sumOfRoots + Math.sqrt(donation)), 2) - pledgeAmount;
-  //   const matchingText = `* for a donation of $ ${donation} the matchind fund is $ ${matchingFund}`;
-  //   setMatchingText(matchingText);
-  // }
-
-  // const updateMatchingText = (donation) => {  
-  //   const matchingFund = Math.pow((initiative.sumOfRoots + Math.sqrt(donation)), 2) - initiative.pledgeAmount;
-  //   const matchingText = `* for a donation of $ ${donation} the matchind fund is $ ${matchingFund}`;
-  //   setMatchingText(matchingText);
-  // }
 
   return (
     <GlobalLayout>      
