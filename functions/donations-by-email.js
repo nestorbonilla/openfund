@@ -1,6 +1,7 @@
 const { query } = require('./util/hasura');
 
-exports.handler = async () => {
+exports.handler = async ({ queryStringParameters }) => {
+    const { email } = queryStringParameters;
     const { donations } = await query({
         query: `
             query {
@@ -15,8 +16,17 @@ exports.handler = async () => {
           
         `
     });
+    const donationsByEmail = donations.find((d) => d.email === email);
+
+    if (!donationsByEmail) {
+        return {
+            statusCode: 404,
+            body: 'Not found'
+        }
+    }
+
     return {
         statusCode: 200,
-        body: JSON.stringify(donations)
+        body: JSON.stringify(donationsByEmail)
     }
 }

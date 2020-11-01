@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Row, Col, Card, Tag, Carousel, Tooltip, Divider, Typography, Progress } from 'antd';
+import { Button, Row, Col, Card, Tag, Image, Carousel, Tooltip, Divider, Typography, Progress } from 'antd';
 import { graphql } from 'gatsby';
 import { FacebookOutlined, InstagramOutlined, ChromeOutlined } from '@ant-design/icons';
 import GlobalLayout from '../components/globalLayout';
@@ -73,6 +73,7 @@ function Initiative({ data }) {
     }).then(res => res.json());
 
     const stripe = await stripePromise;
+    
     const { error } = await stripe.redirectToCheckout({
       sessionId: response.sessionId,
     });
@@ -82,22 +83,18 @@ function Initiative({ data }) {
     }
   }
 
-  const contentStyle = {
-    height: '300px',
-    color: '#000',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#EDFF38',
+  const styles = {
+    backgroundImage: `linear-gradient(to bottom, rgba(42, 131, 197, 0.8), rgba(42, 131, 197, 0.8)), url(${initiative.mainImage})`
   }
 
   return (
-    <GlobalLayout>
+    <GlobalLayout>      
         <Card
           style={{ width: '100%' }}
           cover={
-          <Carousel autoplay>
-            <div key={1}>
-              <h3 style={contentStyle}>1</h3>
+          <Carousel>
+            <div className='banner-image'> 
+              <Image src={initiative.mainImage} />
             </div>
           </Carousel>
           }

@@ -12,17 +12,17 @@ exports.handler = async (event) => {
 
     const result = await query({
         query: `
-            mutation ($amount: String!, $email: String!, $id: String!, $initiativeId: String!, $time: String!) {
-                insert_donations_one(object: {amount: $amount, email: $email, id: $id, initiativeId: $initiativeId, time: $time}) {
+            mutation ($amount: String!, $email: String!, $initiative: String!) {
+                insert_donations_one(object: {amount: $amount, email: $email, initiative: $initiative}) {
                     amount
                     email
                     id
-                    initiativeId
+                    initiative
                     time
                 }
             }
         `,
-        variables: { amount, email, id, initiativeId, time }
+        variables: { amount, email, initiative }
     });
     
     const emailToSend = {
