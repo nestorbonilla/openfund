@@ -17,6 +17,9 @@ exports.handler = async () => {
                     status
                     webUrl
                     category
+                    sumOfDonations
+                    sumOfRoots
+                    pledgeAmount
                 }
             }
           

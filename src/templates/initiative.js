@@ -26,6 +26,9 @@ export const query = graphql`
           igUrl
           webUrl
           mainImage
+          sumOfDonations
+          sumOfRoots
+          pledgeAmount
         }
       }
     }
@@ -154,14 +157,16 @@ function Initiative({ data }) {
                 <Row justify="center">
                   <Col span={12}>
                     <Title level={4}>Support us</Title>
-                    <Paragraph>some</Paragraph>
-                    <Progress strokeColor="#000" strokeWidth={15} showInfo={false} style={{paddingLeft: "24px", paddingRight: "24px"}} percent={50} status="active" />
+                    <Paragraph>$ {initiative.sumOfDonations} donated + $ {Math.pow(initiative.sumOfRoots, 2) - initiative.pledgeAmount} estimated match</Paragraph>
+                    <Progress strokeColor="#000" strokeWidth={15} showInfo={false} style={{paddingLeft: "24px", paddingRight: "24px"}} percent={
+                      Math.round((initiative.sumOfDonations + (Math.pow(initiative.sumOfRoots, 2) - initiative.pledgeAmount)) * 100 /initiative.goal)
+                    } status="active" />
                     <Row justify="center">
-                      <Col span={1}>
-                        <div>hello</div>
+                      <Col span={5}>
+                        <div>$ {initiative.sumOfDonations + (Math.pow(initiative.sumOfRoots, 2) - initiative.pledgeAmount)} estimated total</div>
                       </Col>
-                      <Col span={1} offset={10}>
-                        <div>hello2</div>
+                      <Col span={5} offset={14}>
+                        <div>$ {initiative.goal} goal</div>
                       </Col>
                     </Row>
                     <Button type="link" style={{width: "100%"}} onClick={() => setInformationModalVisible(true)}>Learn how our donation matching works</Button>

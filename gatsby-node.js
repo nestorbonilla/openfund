@@ -15,6 +15,8 @@ exports.createPages = async ({ actions: { createPage }, graphql }) => {
           igUrl
           webUrl
           mainImage
+          sumOfRoots
+          pledgeAmount
         }
       }
     }

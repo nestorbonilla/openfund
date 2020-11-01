@@ -68,7 +68,9 @@ function Index() {
                         }
                         actions={[
                             <Tooltip placement="bottom" title="estimated">
-                            <Progress strokeColor="#000" style={{paddingLeft: "24px", paddingRight: "24px"}} percent={50} status="active" />
+                            <Progress strokeColor="#000" style={{paddingLeft: "24px", paddingRight: "24px"}} percent={
+                                Math.round((item.sumOfDonations + (Math.pow(item.sumOfRoots, 2) - item.pledgeAmount)) * 100 /item.goal)
+                            } status="active" />
                             </Tooltip>,
                             <Tooltip placement="bottom" title="fund initiative">
                             <Link to={'/initiative/' + item.id}><DollarOutlined key="fund" /></Link>
