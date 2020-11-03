@@ -60,6 +60,14 @@ module.exports = {
             })
           }
         }
+      },
+      {
+        resolve: 'gatsby-plugin-social9-socialshare',
+        options: {
+          content:  '925a498975c14bfabc3c6db5e192b0a1',
+          async:  true,
+          defer:  true
+        }
       }
     ]
 }

@@ -127,6 +127,11 @@ function Initiative({ data }) {
             style={{}}
             description={
               <div className="opportunity-detail-card">
+                <Row justify="center" style={{marginBottom: "8px"}}>
+                  <Col span={24}>
+                    <div className="s9-widget-wrapper"/>
+                  </Col>
+                </Row>
                 <Row justify="space-between" style={{marginBottom: "8px"}}>
                   <Col span={24}>
                     {initiative.deadline}
